@@ -69,37 +69,37 @@ class L2Cache(Cache):
 
 system = System()
 
-system.clk_domain = SrcClockDomain()
-system.clk_domain.clock = "1GHz"
-system.clk_domain.voltage_domain = VoltageDomain()
+# system.clk_domain = SrcClockDomain()
+# system.clk_domain.clock = "1GHz"
+# system.clk_domain.voltage_domain = VoltageDomain()
 
-## Define Clock Domain, Voltage Domain
-## Define the frequency to voltage mappings
-#op_points = [
-#    ('1.0GHz', '1.0V'),
-#    ('750MHz', '0.9V'),
-#    ('500MHz', '0.8V')
-#]
-#frequencies = [op[0] for op in op_points]
-#voltages = [op[1] for op in op_points]
-#
-## Create a voltage domain with our list of voltages
-## This allows the domain to switch between these voltage levels
-#system.voltage_domain = VoltageDomain(voltage=voltages)
-#
-## Create a source clock domain with our list of frequencies
-#system.clk_domain = SrcClockDomain(
-#    clock=frequencies,
-#    voltage_domain=system.voltage_domain,
-#)
-#
-## Create the DVFS handler
-## This object manages switching between the operating points
-#system.dvfs_handler = DVFSHandler(
-#    sys_clk_domain=system.clk_domain,
-##    domains=[system.clk_domain],
-#    enable=True
-#)
+# Define Clock Domain, Voltage Domain
+# Define the frequency to voltage mappings
+op_points = [
+    ('1.0GHz', '1.0V'),
+    ('750MHz', '0.9V'),
+    ('500MHz', '0.8V')
+]
+frequencies = [op[0] for op in op_points]
+voltages = [op[1] for op in op_points]
+
+# Create a voltage domain with our list of voltages
+# This allows the domain to switch between these voltage levels
+system.voltage_domain = VoltageDomain(voltage=voltages)
+
+# Create a source clock domain with our list of frequencies
+system.clk_domain = SrcClockDomain(
+    clock=frequencies,
+    voltage_domain=system.voltage_domain,
+)
+
+# Create the DVFS handler
+# This object manages switching between the operating points
+system.dvfs_handler = DVFSHandler(
+    sys_clk_domain=system.clk_domain,
+#    domains=[system.clk_domain],
+    enable=True
+)
 
 
 system.mem_mode = "timing"
